@@ -83,8 +83,6 @@ Humanoid.prototype.greet = function(language) {
     language: 'Common Tongue',
   });
 
-  console.log(mage);
-
   const swordsman = new Humanoid({
     createdAt: new Date(),
     dimensions: {
