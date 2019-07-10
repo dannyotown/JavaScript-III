@@ -66,6 +66,14 @@ Humanoid.prototype.greet = function(language) {
 */
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
+function Hero(attributes) {
+  Humanoid.call(this,attributes);
+}
+Hero.prototype = Object.create(Humanoid.prototype);
+function Villain(attributes) {
+  Humanoid.call(this,attributes);
+}
+Villain.prototype = Object.create(Humanoid.prototype);
 
 
   const mage = new Humanoid({
@@ -116,6 +124,7 @@ Humanoid.prototype.greet = function(language) {
     ],
     language: 'Elvish',
   });
+  
 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
@@ -132,3 +141,63 @@ Humanoid.prototype.greet = function(language) {
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  
+  const bobBarker = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 15,
+    name: 'Bob Barker',
+    team: 'Golf God',
+    weapons: [
+      'Putter',
+      '5 Iron',
+    ],
+    language: 'Golfish',
+  });
+
+  const happyGilmore = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 3,
+      height: 5,
+    },
+    healthPoints: 25,
+    name: 'Happy Gilmore',
+    team: 'Hockey Player',
+    weapons: [
+      'Hockey Stick',
+      'Chubs hand',
+    ],
+    language: 'Hockeyish',
+  });
+
+
+  console.log(bobBarker.name);
+  
+  console.log(happyGilmore.name);
+
+  function fight(){
+    let heroHealth = bobBarker.healthPoints - 5;
+    let villianHealth = happyGilmore.healthPoints - 5;
+    console.log(bobBarker.name +' strikes '+ happyGilmore.name);
+    let heroHit = function(){
+      let newHealth = (villianHealth - 5);
+      return console.log(happyGilmore.name+ ' has '+ newHealth + ' health left!');
+    }
+    let villianHit = function(){
+      let newHealth = (heroHealth - 5);
+      return console.log(bobBarker.name+' has '+ newHealth+ ' health left!');
+    }
+    heroHit();
+    console.log(happyGilmore.name +' strikes '+ bobBarker.name);
+    villianHit();
+
+
+  }
+fight();
+
